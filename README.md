@@ -11,5 +11,5 @@ MMCV_WITH_OPS=1 pip install -e .
 cd ..  
 git clone https://github.com/123qwaz/aug.git  
 cd aug/main  
-pip install -v -e .
+pip install -v -e .  
 ···  
