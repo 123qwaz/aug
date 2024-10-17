@@ -13,3 +13,33 @@ git clone https://github.com/123qwaz/aug.git
 cd aug/main  
 pip install -v -e .  
 ```
+After downloading the pretrained models, please conduct the experiments by running  
+```  
+# for single machine
+bash main/tools/dist_train.sh <Config PATH> <NUM GPUs> --cfg-options model.pretrained=<Pretrained PATH> --seed 0
+
+# for multiple machines
+python -m torch.distributed.launch --nnodes <Num Machines> --node_rank <Rank of Machine> --nproc_per_node <GPUs Per Machine> --master_addr <Master Addr> --master_port <Master Port> tools/train.py <Config PATH> --cfg-options model.pretrained=<Pretrained PATH> --launcher pytorch --seed 0
+```  
+To test the pretrained models performance, please run  
+```  
+bash tools/dist_test.sh <Config PATH> <Checkpoint PATH> <NUM GPUs>
+```  
+# Acknowledge
+We acknowledge the excellent implementation from [mmpose](https://github.com/open-mmlab/mmdetection) and [Vitpose](https://github.com/ViTAE-Transformer/ViTPose)  
+# Citing
+```  
+@inproceedings{
+  xu2022vitpose,
+  title={Vi{TP}ose: Simple Vision Transformer Baselines for Human Pose Estimation},
+  author={Yufei Xu and Jing Zhang and Qiming Zhang and Dacheng Tao},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2022},
+}
+@inproceedings{
+  xu2024aug,
+  title={Creating Occluded Images: A Self-Occlusion dataset for Crowd Pose Estimation},
+  author={Lingling Li and Chunxiao Song and Song Wang and Gangtao Han and Enqing Chen and Guanghui Wang},
+  year={2024},
+}
+```  
